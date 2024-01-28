@@ -11,7 +11,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromARGB(255, 31, 31, 31),
       body: Center(
         child: ElevatedButton(onPressed: () {}, child: Text("Get started")),
       ),
