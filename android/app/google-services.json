@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1054915023678",
+    "firebase_url": "https://nexsync-58c6f-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "nexsync-58c6f",
+    "storage_bucket": "nexsync-58c6f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054915023678:android:e7cdd5558dfdc025c6126f",
+        "android_client_info": {
+          "package_name": "com.example.nexsync"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA28KPqCsgmdKOvCtUFsUUVVcOhv3Gnsxs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
