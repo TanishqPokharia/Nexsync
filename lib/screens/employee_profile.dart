@@ -1,10 +1,23 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:nexsync/mediaquery/media_query.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
+class Performace {
+  Performace(this.title, this.color, this.count);
+  String title;
+  Color color;
+  int count;
+}
+
 class EmployeeProfile extends StatelessWidget {
-  const EmployeeProfile({super.key});
+  EmployeeProfile({super.key});
+  List<Performace> datasource = [
+    Performace("Deadlines missed", Colors.red, 20),
+    Performace("Deadlines met", Colors.blue, 80)
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +29,7 @@ class EmployeeProfile extends StatelessWidget {
               children: [
                 Container(
                   width: double.infinity,
-                  height: 150,
+                  height: MQ.adaptiveSize(context, 150),
                   margin: EdgeInsets.zero,
                   color: Colors.blue,
                   child: Center(
@@ -28,9 +41,9 @@ class EmployeeProfile extends StatelessWidget {
                 ),
                 Container(
                   alignment: Alignment.center,
-                  padding: EdgeInsets.only(top: 100),
+                  padding: EdgeInsets.only(top: MQ.adaptiveSize(context, 100)),
                   child: CircleAvatar(
-                    radius: 70,
+                    radius: MQ.adaptiveSize(context, 70),
                     foregroundImage: NetworkImage(
                         "https://w7.pngwing.com/pngs/177/551/png-transparent-user-interface-design-computer-icons-default-stephen-salazar-graphy-user-interface-design-computer-wallpaper-sphere-thumbnail.png"),
                   ),
@@ -40,7 +53,7 @@ class EmployeeProfile extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  margin: EdgeInsets.all(10),
+                  margin: EdgeInsets.all(MQ.adaptiveSize(context, 10)),
                   child: Text(
                     "Employee Name",
                     style: TextStyle(color: Colors.white, fontSize: 24),
@@ -62,18 +75,19 @@ class EmployeeProfile extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(MQ.adaptiveSize(context, 10)),
               child: Card(
                 color: Color.fromARGB(255, 49, 48, 48),
                 child: Column(
                   children: [
                     Container(
-                      margin: EdgeInsets.all(20),
+                      margin: EdgeInsets.all(MQ.adaptiveSize(context, 20)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            margin: EdgeInsets.all(10),
+                            margin:
+                                EdgeInsets.all(MQ.adaptiveSize(context, 10)),
                             child: Text(
                               "Appraisal Rating: ",
                               style:
@@ -109,59 +123,34 @@ class EmployeeProfile extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.all(10),
+                      margin: EdgeInsets.all(MQ.adaptiveSize(context, 10)),
                       child: Text(
                         "Remarks: ",
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
-                    Container(
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                "Deadline missed :   ",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              SizedBox.square(
-                                dimension: 10,
-                                child: Container(
-                                  color: Colors.red,
-                                ),
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Deadline met :   ",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox.square(
-                                dimension: 10,
-                                child: Container(
-                                  color: Colors.blue,
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    SfSparkWinLossChart(
-                      data: [
-                        ...List.generate(15, (index) => index),
-                        ...List.generate(15, (index) => -index)
+                    SfCircularChart(
+                      title: ChartTitle(
+                          text: "Performance Chart",
+                          textStyle: TextStyle(
+                            color: Colors.white,
+                          )),
+                      tooltipBehavior: TooltipBehavior(enable: true),
+                      legend: Legend(
+                          textStyle:
+                              TextStyle(color: Colors.white, fontSize: 16),
+                          isVisible: true,
+                          overflowMode: LegendItemOverflowMode.wrap),
+                      series: [
+                        DoughnutSeries<Performace, String>(
+                          pointColorMapper: (datum, index) => datum.color,
+                          xValueMapper: (datum, index) => datum.title,
+                          yValueMapper: (datum, index) => datum.count,
+                          dataSource: datasource,
+                          dataLabelSettings: DataLabelSettings(isVisible: true),
+                          enableTooltip: true,
+                        )
                       ],
-                      trackball: SparkChartTrackball(
-                          labelStyle: TextStyle(color: Colors.white),
-                          activationMode: SparkChartActivationMode.tap),
                     )
                   ],
                 ),
@@ -169,13 +158,13 @@ class EmployeeProfile extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(MQ.adaptiveSize(context, 10)),
               child: Card(
                 color: Color.fromARGB(255, 49, 48, 48),
                 child: Column(
                   children: [
                     Container(
-                        margin: EdgeInsets.all(20),
+                        margin: EdgeInsets.all(MQ.adaptiveSize(context, 20)),
                         child: Wrap(
                           children: [
                             Text(
@@ -191,43 +180,43 @@ class EmployeeProfile extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(MQ.adaptiveSize(context, 10)),
               child: Card(
                 color: Color.fromARGB(255, 49, 48, 48),
                 child: Column(
                   children: [
                     Container(
-                        margin: EdgeInsets.all(20),
+                        margin: EdgeInsets.all(MQ.adaptiveSize(context, 20)),
                         child: Text("Professional Details",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 24))),
                     Container(
-                        margin: EdgeInsets.all(10),
+                        margin: EdgeInsets.all(MQ.adaptiveSize(context, 10)),
                         child: Text("Joining Date",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 18))),
                     Container(
-                        margin: EdgeInsets.all(10),
+                        margin: EdgeInsets.all(MQ.adaptiveSize(context, 10)),
                         child: Text("Reporting Manager",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 18))),
                     Container(
-                        margin: EdgeInsets.all(10),
+                        margin: EdgeInsets.all(MQ.adaptiveSize(context, 10)),
                         child: Text("Languages",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 18))),
                     Container(
-                        margin: EdgeInsets.all(10),
+                        margin: EdgeInsets.all(MQ.adaptiveSize(context, 10)),
                         child: Text("Salary",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 18))),
                     Container(
-                        margin: EdgeInsets.all(10),
+                        margin: EdgeInsets.all(MQ.adaptiveSize(context, 10)),
                         child: Text("Site",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 18))),
                     Container(
-                        margin: EdgeInsets.all(10),
+                        margin: EdgeInsets.all(MQ.adaptiveSize(context, 10)),
                         child: Text("Work Location",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 18)))
@@ -237,13 +226,13 @@ class EmployeeProfile extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(MQ.adaptiveSize(context, 10)),
               child: Card(
                 color: Color.fromARGB(255, 49, 48, 48),
                 child: Column(
                   children: [
                     Container(
-                        margin: EdgeInsets.all(20),
+                        margin: EdgeInsets.all(MQ.adaptiveSize(context, 20)),
                         child: Text("Certifications",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 24))),
