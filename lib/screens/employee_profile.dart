@@ -168,7 +168,7 @@ class EmployeeProfile extends StatelessWidget {
                         child: Wrap(
                           children: [
                             Text(
-                              "Assigned Project: Project ka naam jo bhi ho",
+                              "Assigned Project",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 24),
                             ),

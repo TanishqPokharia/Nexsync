@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Future.delayed(const Duration(seconds: 2), () {
-      GoRouter.of(context).goNamed(AppRouterConstants.welcomeScreen);
+      GoRouter.of(context).goNamed(AppRouterConstants.landingPage);
     });
   }
 

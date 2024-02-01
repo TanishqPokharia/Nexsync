@@ -44,6 +44,8 @@ dependencies:
   syncfusion_flutter_charts: ^24.1.47+2
   filter_list: ^1.0.2
   font_awesome_flutter: ^10.7.0
+  firebase_auth: ^4.17.0
+  firebase_database: ^10.4.1
 
 
 dev_dependencies:

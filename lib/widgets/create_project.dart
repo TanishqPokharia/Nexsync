@@ -1,5 +1,7 @@
+import 'package:go_router/go_router.dart';
 import 'package:nexsync/models/employee_model.dart';
 import 'package:flutter/material.dart';
+import 'package:nexsync/router/app_router_constants.dart';
 import 'employee_card.dart';
 
 List<Employee> listofEmployee = [
@@ -100,8 +102,14 @@ class CreateProjectState extends State<CreateProject> {
               mainAxisSpacing: 10,
               crossAxisSpacing: 20,
               children: [
-                ...filteredList.map((e) => EmployeeCard(
-                      employee: e,
+                ...filteredList.map((e) => GestureDetector(
+                      onLongPress: () {
+                        // GoRouter.of(context)
+                        //     .push(AppRouterConstants.profileScreen);
+                      },
+                      child: EmployeeCard(
+                        employee: e,
+                      ),
                     ))
               ],
             ),
