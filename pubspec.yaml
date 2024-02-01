@@ -40,6 +40,9 @@ dependencies:
   cupertino_icons: ^1.0.6
   shimmer: ^3.0.0
   go_router: ^13.1.0
+  firebase_core: ^2.24.2
+  syncfusion_flutter_charts: ^24.1.47+2
+  filter_list: ^1.0.2
 
 
 dev_dependencies:
