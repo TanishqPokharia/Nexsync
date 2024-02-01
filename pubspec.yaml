@@ -43,10 +43,10 @@ dependencies:
   firebase_core: ^2.24.2
   syncfusion_flutter_charts: ^24.1.47+2
   filter_list: ^1.0.2
+  font_awesome_flutter: ^10.7.0
 
 
 dev_dependencies:
-  font_awesome_flutter:
 
 
   flutter_test:

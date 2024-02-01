@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -31,9 +30,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         });
                       },
                       child: Container(
-                        margin: EdgeInsets.all(120.0),  // Adjusted margin value
+                        margin: EdgeInsets.all(120.0), // Adjusted margin value
                         decoration: BoxDecoration(
-                          color: isSelectedHR ? Colors.deepPurpleAccent : Colors.purple[900],
+                          color: isSelectedHR
+                              ? Colors.deepPurpleAccent
+                              : Colors.purple[900],
                           borderRadius: BorderRadius.circular(12.0),
                         ),
                         child: Column(
@@ -42,7 +43,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             ImageIcon(
                               AssetImage("images/hr.png"),
                               size: 150.0,
-                              color: isSelectedHR ? Colors.white : Color(0xFF8D8E98),
+                              color: isSelectedHR
+                                  ? Colors.white
+                                  : Color(0xFF8D8E98),
                             ),
                             SizedBox(
                               height: 10.0,
@@ -51,7 +54,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               'HR',
                               style: TextStyle(
                                 fontSize: 25.0,
-                                color: isSelectedHR ? Colors.white : Color(0xFF8D8E98),
+                                color: isSelectedHR
+                                    ? Colors.white
+                                    : Color(0xFF8D8E98),
                               ),
                             ),
                           ],
@@ -68,9 +73,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         });
                       },
                       child: Container(
-                        margin: EdgeInsets.all(120.0),  // Adjusted margin value
+                        margin: EdgeInsets.all(120.0), // Adjusted margin value
                         decoration: BoxDecoration(
-                          color: isSelectedEmployee ? Colors.deepPurpleAccent : Colors.purple[900],
+                          color: isSelectedEmployee
+                              ? Colors.deepPurpleAccent
+                              : Colors.purple[900],
                           borderRadius: BorderRadius.circular(12.0),
                         ),
                         child: Column(
@@ -79,7 +86,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             ImageIcon(
                               AssetImage("images/worker.png"),
                               size: 150.0,
-                              color: isSelectedEmployee ? Colors.white : Color(0xFF8D8E98),
+                              color: isSelectedEmployee
+                                  ? Colors.white
+                                  : Color(0xFF8D8E98),
                             ),
                             SizedBox(
                               height: 10.0,
@@ -88,7 +97,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               'Employee',
                               style: TextStyle(
                                 fontSize: 25.0,
-                                color: isSelectedEmployee ? Colors.white : Color(0xFF8D8E98),
+                                color: isSelectedEmployee
+                                    ? Colors.white
+                                    : Color(0xFF8D8E98),
                               ),
                             ),
                           ],
@@ -111,7 +122,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     builder: (BuildContext context) {
                       return AlertDialog(
                         title: Text("Select a choice"),
-                        content: Text("Please select either HR or Employee before proceeding."),
+                        content: Text(
+                            "Please select either HR or Employee before proceeding."),
                         actions: [
                           TextButton(
                             onPressed: () {
