@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:nexsync/main.dart';
 import 'package:nexsync/models/employee_model.dart';
 
 class EmployeeCard extends StatelessWidget {
@@ -10,20 +13,66 @@ class EmployeeCard extends StatelessWidget {
     return Card(
       color: const Color.fromARGB(255, 64, 61, 61),
       child: Container(
-        height: 200,
-        child: Column(
+        padding: EdgeInsets.all(context.adaptiveSize(20)),
+        height: context.adaptiveSize(300),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-                padding: EdgeInsets.all(20),
-                child: CircleAvatar(
-                  radius: 50,
-                  backgroundImage: NetworkImage(
-                      "https://w7.pngwing.com/pngs/177/551/png-transparent-user-interface-design-computer-icons-default-stephen-salazar-graphy-user-interface-design-computer-wallpaper-sphere-thumbnail.png"),
-                )),
-            Text(
-              employee.name,
-              style: TextStyle(color: Colors.white),
-            )
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: context.adaptiveSize(150),
+                      child: Text(
+                        employee.name,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: context.adaptiveSize(20)),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      employee.departmentID ?? "Department ID",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: context.adaptiveSize(20)),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      child: Text(
+                        employee.departmentName,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: context.adaptiveSize(20)),
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  width: context.adaptiveSize(150),
+                  child: Text(
+                    employee.designation!,
+                    style: TextStyle(
+                        color: Colors.white,
+                        overflow: TextOverflow.ellipsis,
+                        fontSize: context.adaptiveSize(20)),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

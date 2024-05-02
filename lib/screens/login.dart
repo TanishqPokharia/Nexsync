@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nexsync/auth/auth_services.dart';
+import 'package:nexsync/router/app_router_constants.dart';
+import 'package:shimmer/shimmer.dart';
 // import 'package:prognosify/auth/auth_services.dart';
 // import 'package:prognosify/auth/google_sign_in.dart';
 // import 'package:prognosify/router/app_router_constants.dart';
 // import 'package:provider/provider.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class LogInScreen extends StatefulWidget {
+  const LogInScreen({super.key, required this.isHR});
+  final bool isHR;
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<LogInScreen> createState() => _LogInScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _LogInScreenState extends State<LogInScreen> {
   final _formKeySignIn = GlobalKey<FormState>();
   bool _passwordHideStatus = true;
   String email = "";
@@ -28,7 +32,7 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(255, 31, 31, 31),
         body: Stack(
           children: [
             Form(
@@ -42,7 +46,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       child: Hero(
                         tag: "Tag",
                         child: Image.asset(
-                          "assets/applogo.png",
+                          "assets/nex.png",
                           width: mq(context, 350),
                           height: mq(context, 250),
                         ),
@@ -54,7 +58,8 @@ class _SignInScreenState extends State<SignInScreen> {
                             right: mq(context, 45),
                             left: mq(context, 45)),
                         child: TextFormField(
-                          style: TextStyle(fontSize: mq(context, 21)),
+                          style: TextStyle(
+                              fontSize: mq(context, 21), color: Colors.white),
                           key: const ValueKey("emailSignIn"),
                           validator: (value) {
                             if (value!.length < 5) {
@@ -71,7 +76,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(
-                                      Radius.circular(mq(context, 25)))),
+                                      Radius.circular(mq(context, 10)))),
                               label: Text(
                                 "Email",
                                 style: TextStyle(fontSize: mq(context, 25)),
@@ -84,15 +89,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: mq(context, 45)),
                       child: TextFormField(
-                        style: TextStyle(fontSize: mq(context, 21)),
+                        style: TextStyle(
+                            fontSize: mq(context, 21), color: Colors.white),
                         key: const ValueKey("passwordSignIn"),
-                        validator: (value) {
-                          if (value!.length < 5) {
-                            return "Create a strong password";
-                          } else {
-                            return null;
-                          }
-                        },
                         onSaved: (newValue) {
                           setState(() {
                             password = newValue!;
@@ -102,7 +101,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(
-                                    Radius.circular(mq(context, 25)))),
+                                    Radius.circular(mq(context, 10)))),
                             label: Text(
                               "Password",
                               style: TextStyle(fontSize: mq(context, 25)),
@@ -121,28 +120,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          top: mq(context, 35), right: mq(context, 45)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              print("Response");
-                            },
-                            child: Text(
-                              "Forgot password?",
-                              style: TextStyle(
-                                  fontSize: mq(context, 21),
-                                  color: Theme.of(context).colorScheme.primary,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: mq(context, 45)),
+                          top: 30, bottom: 10, left: 20, right: 20),
                       child: Column(
                         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -150,101 +128,46 @@ class _SignInScreenState extends State<SignInScreen> {
                             margin: EdgeInsets.only(top: mq(context, 65)),
                             height: mq(context, 65),
                             width: double.infinity,
-                            child: ElevatedButton(
-                                onPressed: () async {
-                                  if (_formKeySignIn.currentState!.validate()) {
-                                    _formKeySignIn.currentState!.save();
-                                    // AuthServices.signInUser(
-                                    //     email, password, context);
-                                  }
-                                },
-                                child: Text("Sign In",
-                                    style:
-                                        TextStyle(fontSize: mq(context, 21)))),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: mq(context, 35)),
-                            height: mq(context, 65),
-                            width: double.infinity,
-                            child: TextButton(
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all(
-                                        RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                mq(context, 35)),
-                                            side: BorderSide(
-                                                width: mq(context, 2),
-                                                color: Colors.teal)))),
-                                onPressed: () {
-                                  // final provider =
-                                  //     Provider.of<GoogleSignInProvider>(context,
-                                  //         listen: false);
-                                  // waitForLogin(provider.googleLogin(context));
-                                  setState(() {
-                                    waiting = true;
-                                  });
-                                  // provider
-                                  // .googleLogin(context)
-                                  // .whenComplete(() {
-                                  // setState(() {
-                                  // waiting = false;
-                                  // });
-                                  // ScaffoldMessenger.of(context).showSnackBar(
-                                  //     const SnackBar(
-                                  //         content: Text(
-                                  //             "Signed In Successfully!")));
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: Color.fromARGB(255, 46, 45, 45)),
+                            child: Shimmer(
+                              gradient: LinearGradient(colors: [
+                                Colors.white,
+                                Colors.yellow,
+                                Colors.pink,
+                                Colors.blue,
+                                Colors.cyan
+                              ]),
+                              child: TextButton(
+                                  onPressed: () async {
+                                    if (_formKeySignIn.currentState!
+                                        .validate()) {
+                                      _formKeySignIn.currentState!.save();
+                                      await AuthServices.logInHR(
+                                          email, password);
 
-                                  // GoRouter.of(context).goNamed(
-                                  //     AppRouterConstants.navigationScreen);
-                                },
-                                child: Row(
-                                  // spacing: mq(context, 15),
-                                  mainAxisAlignment: MainAxisAlignment.center,
-
-                                  children: [
-                                    FaIcon(
-                                      FontAwesomeIcons.google,
-                                      size: mq(context, 24),
-                                    ),
-                                    SizedBox(
-                                      width: mq(context, 15),
-                                    ),
-                                    Text(
-                                      "Sign in with Google",
+                                      if (context.mounted) {
+                                        if (widget.isHR) {
+                                          GoRouter.of(context).goNamed(
+                                              AppRouterConstants
+                                                  .landingScreenHR);
+                                        } else {
+                                          GoRouter.of(context).goNamed(
+                                              AppRouterConstants
+                                                  .landingScreenEmployee);
+                                        }
+                                      }
+                                    }
+                                  },
+                                  child: Text("Log In",
                                       style: TextStyle(
-                                          fontSize: mq(context, 21),
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ],
-                                )),
-                          )
+                                          fontSize: mq(context, 28)))),
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.all(mq(context, 40)),
-                      child: Wrap(
-                        spacing: mq(context, 10),
-                        children: [
-                          Text(
-                            "Don't have an account?",
-                            style: TextStyle(fontSize: mq(context, 21)),
-                          ),
-                          GestureDetector(
-                              onTap: () {
-                                // GoRouter.of(context)
-                                //     .goNamed(AppRouterConstants.signUpScreen);
-                              },
-                              child: Text(
-                                "Register",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: mq(context, 21)),
-                              ))
-                        ],
-                      ),
-                    )
                   ],
                 ),
               ),

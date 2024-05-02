@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
+import 'package:nexsync/router/app_router_constants.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -19,10 +21,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       backgroundColor: Color.fromARGB(255, 31, 31, 31),
       body: Center(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.only(top: 200),
+              margin: EdgeInsets.only(top: 50),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -38,11 +40,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       width: 100,
                       margin: EdgeInsets.all(40.0), // Adjusted margin value
                       decoration: BoxDecoration(
-                        color: isSelectedHR
-                            ? Colors.deepPurpleAccent
-                            : Colors.purple[900],
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
+                          color: isSelectedHR
+                              ? Colors.deepPurpleAccent
+                              : Colors.purple[900],
+                          borderRadius: BorderRadius.circular(12.0),
+                          boxShadow: [
+                            if (isSelectedHR)
+                              BoxShadow(blurRadius: 10, color: Colors.purple)
+                          ]),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -80,11 +85,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       width: 100,
                       margin: EdgeInsets.all(40.0), // Adjusted margin value
                       decoration: BoxDecoration(
-                        color: isSelectedEmployee
-                            ? Colors.deepPurpleAccent
-                            : Colors.purple[900],
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
+                          color: isSelectedEmployee
+                              ? Colors.deepPurpleAccent
+                              : Colors.purple[900],
+                          borderRadius: BorderRadius.circular(12.0),
+                          boxShadow: [
+                            if (isSelectedEmployee)
+                              BoxShadow(blurRadius: 10, color: Colors.purple)
+                          ]),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -117,14 +125,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Container(
               alignment: Alignment.bottomCenter,
               width: double.infinity,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(10)),
-              padding: EdgeInsets.only(top: 400, bottom: 20),
-              child: ElevatedButton(
+              margin: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [BoxShadow(blurRadius: 2, color: Colors.purple)]),
+              child: TextButton(
                 onPressed: () {
-                  if (isSelectedHR || isSelectedEmployee) {
+                  if (isSelectedHR) {
                     // Do something when a card is selected
-                    print('Card selected');
+                    GoRouter.of(context)
+                        .pushNamed(AppRouterConstants.logInScreen, extra: true);
+                  } else if (isSelectedEmployee) {
+                    GoRouter.of(context).pushNamed(
+                        AppRouterConstants.logInScreen,
+                        extra: false);
                   } else {
                     // Show a dialog if no card is selected
                     showDialog(
@@ -147,11 +161,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     );
                   }
                 },
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.deepPurpleAccent,
+                child: Text(
+                  "Get started",
+                  style: TextStyle(color: Colors.white),
                 ),
-                child: Text("Get started"),
               ),
             ),
           ],
